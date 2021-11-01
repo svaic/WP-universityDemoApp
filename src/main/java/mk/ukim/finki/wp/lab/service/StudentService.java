@@ -2,12 +2,13 @@ package mk.ukim.finki.wp.lab.service;
 
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.repository.InMemoryStudentRepository;
+import mk.ukim.finki.wp.lab.service.imp.IStudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class StudentService implements mk.ukim.finki.wp.lab.service.imp.StudentService {
+public class StudentService implements IStudentService {
 
     private final InMemoryStudentRepository studentRepository;
 

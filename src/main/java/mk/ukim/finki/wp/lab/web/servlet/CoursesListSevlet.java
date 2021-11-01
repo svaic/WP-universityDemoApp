@@ -24,14 +24,17 @@ public class CoursesListSevlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        WebContext webContext = new WebContext(req,resp,req.getServletContext());
         resp.setContentType("text/html; charset=utf-8");
+        WebContext webContext = new WebContext(req,resp,req.getServletContext());
+
         webContext.setVariable("courses",courseService.listAll());
         springTemplateEngine.process("listCourses.html",webContext,resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=utf-8");
+
         Long courseId = Long.valueOf(req.getParameter("courseId"));
         req.getSession().setAttribute("SelectedCourse",courseId);
 

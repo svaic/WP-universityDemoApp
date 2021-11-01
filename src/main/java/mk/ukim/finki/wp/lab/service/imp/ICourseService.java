@@ -5,7 +5,7 @@ import mk.ukim.finki.wp.lab.model.Student;
 
 import java.util.List;
 
-public interface CourseService{
+public interface ICourseService {
     List<Student> listStudentsByCourse(Long courseId);
     List<Student> listStudentsNotHavingCourse(Long courseId);
     Course addStudentInCourse(String username, Long courseId);

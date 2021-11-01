@@ -25,6 +25,8 @@ public class StudentEnrollmentSummary extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=utf-8");
+
         WebContext webContext = new WebContext(req, resp, req.getServletContext());
         webContext.setVariable("courses",courseService.listAll());
         springTemplateEngine.process("studentsInCourse.html",webContext,resp.getWriter());

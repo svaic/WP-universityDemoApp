@@ -19,16 +19,16 @@ public class DataHolder {
     @PostConstruct
     public void init()
     {
-        students.add(new Student("user1","pass1","Tpre","Trpevski"));
-        students.add(new Student("user2","pass1","Cvetko","Cvetkovski"));
-        students.add(new Student("user3","pass1","Marko","Markovski"));
-        students.add(new Student("user4","pass1","Stojko","Stojkovski"));
-        students.add(new Student("user5","pass1","Riste","Ristovski"));
+        students.add(new Student("user1","pass1","Трпе","Трпески"));
+        students.add(new Student("user2","pass1","Цветко","Цветковски"));
+        students.add(new Student("user3","pass1","Марко","Марковски"));
+        students.add(new Student("user4","pass1","Стојко","Стојковски"));
+        students.add(new Student("user5","pass1","Ристе","Ристовски"));
 
-        courses.add(new Course(0L,"Aps","Algoritmi i Podatocni Strukturi", new ArrayList<>(students.subList(0,1))));
-        courses.add(new Course(1L,"Vis","Verojatnost i Statistika",new ArrayList<>(students.subList(1,2))));
-        courses.add(new Course(2L,"NP","Napredno Programiranje",new ArrayList<>(students.subList(2,3))));
-        courses.add(new Course(3L,"IP","Internet Tehnologija na klientska strana",new ArrayList<>(students.subList(3,4))));
-        courses.add(new Course(4L,"KmB","Kompjuterski mrezi i bezbednost",new ArrayList<>(students.subList(4,5))));
+        courses.add(new Course(0L,"Апс","Апгоритми и Податочни Структури", new ArrayList<>(students.subList(0,1))));
+        courses.add(new Course(1L,"Вис","Веројатност и Статистика",new ArrayList<>(students.subList(1,2))));
+        courses.add(new Course(2L,"Нп","Напредно Програмирање",new ArrayList<>(students.subList(2,3))));
+        courses.add(new Course(3L,"Ипнкс","Интернет програмирање на клиентска страна",new ArrayList<>(students.subList(3,4))));
+        courses.add(new Course(4L,"КМиБ","Компјутерски мрежи и безбедност",new ArrayList<>(students.subList(4,5))));
     }
 }

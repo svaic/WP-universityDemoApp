@@ -3,14 +3,14 @@ package mk.ukim.finki.wp.lab.service;
 import mk.ukim.finki.wp.lab.model.Course;
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.repository.InMemoryCourseRepository;
-import mk.ukim.finki.wp.lab.repository.InMemoryStudentRepository;
+import mk.ukim.finki.wp.lab.service.imp.ICourseService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CourseService implements mk.ukim.finki.wp.lab.service.imp.CourseService {
+public class CourseService implements ICourseService {
 
     private final StudentService studentService;
     private final InMemoryCourseRepository courseRepository;

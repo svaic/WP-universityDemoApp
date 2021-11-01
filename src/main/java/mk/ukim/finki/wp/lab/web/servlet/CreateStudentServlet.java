@@ -1,6 +1,6 @@
 package mk.ukim.finki.wp.lab.web.servlet;
 
-import mk.ukim.finki.wp.lab.service.imp.StudentService;
+import mk.ukim.finki.wp.lab.service.imp.IStudentService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -15,15 +15,16 @@ import java.io.IOException;
 public class CreateStudentServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
-    private final StudentService studentService;
+    private final IStudentService studentService;
 
-    public CreateStudentServlet(SpringTemplateEngine springTemplateEngine, StudentService studentService) {
+    public CreateStudentServlet(SpringTemplateEngine springTemplateEngine, IStudentService studentService) {
         this.springTemplateEngine = springTemplateEngine;
         this.studentService = studentService;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=utf-8");
         springTemplateEngine.process("createStudent.html",new WebContext(req,resp,req.getServletContext()),resp.getWriter());
     }
 
