@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>Welcome and Choose a Course</title>
@@ -22,7 +22,11 @@
             <label th:text="${course.description}"></label>
             <br/>
         </th:block>
-        <input type="submit" value="save"></input>
+        <input type="submit" value="save">
+    </form>
+    <form>
+        <input type="text" name="search" th:value="${search} ? ${search} : ''">
+        <input type="submit" value="search">
     </form>
     <a href="/addstudent">Submit</a>
 

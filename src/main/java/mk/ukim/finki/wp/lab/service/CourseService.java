@@ -33,6 +33,11 @@ public class CourseService implements ICourseService {
     }
 
     @Override
+    public List<Course> searchCourses(String text) {
+        return courseRepository.findAllCoursesByName(text);
+    }
+
+    @Override
     public Course addStudentInCourse(String username, Long courseId) {
         Course c = courseRepository.findById(courseId);
         Student s = studentService.findByUsername(username);
