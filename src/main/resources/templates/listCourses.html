@@ -15,11 +15,15 @@
 </header>
 <main>
     <h2>Choose course:</h2>
-    <form th:action="@{/listCourses}"  th:method="post">
+    <th:block th:if="${error}" th:text="${error}"></th:block>
+    <form th:action="@{/courses}"  th:method="POST">
         <th:block th:each="course: ${courses}">
             <input type="radio" name="courseId" th:value="${course.courseId}" th:text="${course.name}" th:checked="${course.courseId == selectedCourse} ? 'true' : 'false'">
             <br>
             <label th:text="${course.description}"></label>
+            <label th:text="${course.type}"></label>
+            <a th:href="@{'courses/edit-form/{id}' (id=${course.courseId})}">edit</a>
+            <a th:href="@{'courses/delete/{id}' (id=${course.courseId})}">delete</a>
             <br/>
         </th:block>
         <input type="submit" value="save">
@@ -28,7 +32,16 @@
         <input type="text" name="search" th:value="${search} ? ${search} : ''">
         <input type="submit" value="search">
     </form>
+    <form action="" method="get">
+        <label>filter by type</label>
+        <select name="type">
+            <option th:each="typeOpt : ${T(mk.ukim.finki.wp.lab.model.CourseType).values()}"
+                    th:value="${typeOpt}" th:text="${typeOpt}"></option>
+        </select>
+        <input type="submit" value="search">
+    </form>
     <a href="/addstudent">Submit</a>
+    <a href="/courses/edit-form">add course</a>
 
 </main>
 </body>

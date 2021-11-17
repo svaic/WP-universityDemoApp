@@ -1,11 +1,13 @@
 package mk.ukim.finki.wp.lab.service;
 
 import mk.ukim.finki.wp.lab.model.Course;
+import mk.ukim.finki.wp.lab.model.CourseType;
 import mk.ukim.finki.wp.lab.model.Student;
 import mk.ukim.finki.wp.lab.repository.InMemoryCourseRepository;
 import mk.ukim.finki.wp.lab.service.imp.ICourseService;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +31,7 @@ public class CourseService implements ICourseService {
     public List<Student> listStudentsNotHavingCourse(Long courseId) {
         List<Student> all = studentService.listAll();
         List<Student> studentsInClass = listStudentsByCourse(courseId);
-        return all.stream().filter(x->!studentsInClass.contains(x)).collect(Collectors.toList());
+        return all.stream().filter(x -> !studentsInClass.contains(x)).collect(Collectors.toList());
     }
 
     @Override
@@ -44,7 +46,7 @@ public class CourseService implements ICourseService {
 
         if (c == null || s == null || c.getStudents().contains(s)) return null;
 
-        return courseRepository.addStudentToCourse(s,c);
+        return courseRepository.addStudentToCourse(s, c);
     }
 
     @Override
@@ -54,6 +56,21 @@ public class CourseService implements ICourseService {
 
     @Override
     public List<Course> listAll() {
-        return courseRepository.findAllCourses();
+        return courseRepository.findAllCourses().stream().sorted(Comparator.comparing(Course::getName)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Course> getCoursesByType(CourseType type) {
+        return courseRepository.findByType(type);
+    }
+
+    @Override
+    public Boolean saveCourse(Course c) {
+        return courseRepository.saveCourse(c);
+    }
+
+    @Override
+    public Boolean deleteCourse(Long courseId) {
+        return courseRepository.deleteCourse(courseId);
     }
 }

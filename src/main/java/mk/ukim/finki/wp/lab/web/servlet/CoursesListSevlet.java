@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="listServlet",urlPatterns = "/listCourses")
+@WebServlet(name="listServlet",urlPatterns = "/listCourses1")
 public class CoursesListSevlet extends HttpServlet {
 
     private final CourseService courseService;
@@ -27,16 +27,7 @@ public class CoursesListSevlet extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         WebContext webContext = new WebContext(req,resp,req.getServletContext());
 
-        if (req.getParameter("search") != null)
-        {
-            String search = req.getParameter("search");
-            webContext.setVariable("search",search);
-            webContext.setVariable("courses",courseService.searchCourses(search));
-        }
-        else
-        {
-            webContext.setVariable("courses",courseService.listAll());
-        }
+        searchParam(req, webContext);
 
         springTemplateEngine.process("listCourses.html",webContext,resp.getWriter());
     }
@@ -51,11 +42,24 @@ public class CoursesListSevlet extends HttpServlet {
             Long courseId = Long.valueOf(req.getParameter("courseId"));
             req.getSession().setAttribute("SelectedCourse",courseId);
 
-
-            webContext.setVariable("courses",courseService.listAll());
             webContext.setVariable("selectedCourse",courseId);
         }
+        searchParam(req, webContext);
 
         springTemplateEngine.process("listCourses.html",webContext,resp.getWriter());
+    }
+
+
+    private void searchParam(HttpServletRequest req, WebContext webContext) {
+        if (req.getParameter("search") != null)
+        {
+            String search = req.getParameter("search");
+            webContext.setVariable("search",search);
+            webContext.setVariable("courses",courseService.searchCourses(search));
+        }
+        else
+        {
+            webContext.setVariable("courses",courseService.listAll());
+        }
     }
 }

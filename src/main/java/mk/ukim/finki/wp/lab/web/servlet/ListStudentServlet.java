@@ -30,7 +30,7 @@ public class ListStudentServlet extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         WebContext webContext = new WebContext(req,resp,req.getServletContext());
 
-        Long courseId = (Long) req.getSession().getAttribute("SelectedCourse");
+        Long courseId = (Long) req.getSession().getAttribute("selectedCourse");
 
         webContext.setVariable("students",courseService.listStudentsNotHavingCourse(courseId));//courseService.listStudentsNotHavingCourse(course.getCourseId()
         springTemplateEngine.process("listStudents.html",webContext,resp.getWriter());
@@ -41,7 +41,7 @@ public class ListStudentServlet extends HttpServlet {
         WebContext webContext = new WebContext(req,resp, req.getServletContext());
         resp.setContentType("text/html; charset=utf-8");
 
-        Long courseId = (Long) webContext.getSession().getAttribute("SelectedCourse");
+        Long courseId = (Long) webContext.getSession().getAttribute("selectedCourse");
         String username = req.getParameter("username");
         courseService.addStudentInCourse(username, courseId);
 

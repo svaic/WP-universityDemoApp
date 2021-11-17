@@ -1,6 +1,7 @@
 package mk.ukim.finki.wp.lab.service.imp;
 
 import mk.ukim.finki.wp.lab.model.Course;
+import mk.ukim.finki.wp.lab.model.CourseType;
 import mk.ukim.finki.wp.lab.model.Student;
 
 import java.util.List;
@@ -12,4 +13,7 @@ public interface ICourseService {
     Course addStudentInCourse(String username, Long courseId);
     Course findCourse(Long courseId);
     List<Course>  listAll();
+    List<Course> getCoursesByType(CourseType type);
+    Boolean saveCourse(Course c);
+    Boolean deleteCourse(Long courseId);
 }

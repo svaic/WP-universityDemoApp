@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:if="${course}!=null">
+        <form th:action="@{/courses/edit-form}" th:method="post" th:object="${course}">
+            <input name="name" th:value="*{name}">
+            <input name="description" th:value="*{description}">
+            <select name="teacher">
+                <th:block th:each="teacher : ${teachers}">
+                    <option th:value="${teacher.id}" th:text="${teacher.name}" th:selected="${teacher.id.equals(course.teacher.id)}"></option>
+                </th:block>
+            </select>
+            <select name="type">
+                <option th:each="typeOpt : ${T(mk.ukim.finki.wp.lab.model.CourseType).values()}"
+                        th:value="${typeOpt}" th:text="${typeOpt}" th:selected="${course.type.equals(typeOpt)}"></option>
+            </select>
+            <input type="hidden" name="id" th:value="${course.courseId}">
+            <input type="submit" value="save">
+        </form>
+    </th:block>
+    <th:block th:if="${course} == null">
+        <form th:action="@{/courses/edit-form}" th:method="post">
+            <input name="name">
+            <input name="description">
+            <select name="teacher">
+                <th:block th:each="teacher : ${teachers}">
+                    <option th:value="${teacher.id}" th:text="${teacher.name}"></option>
+                </th:block>
+            </select>
+            <select name="type">
+                <option th:each="typeOpt : ${T(mk.ukim.finki.wp.lab.model.CourseType).values()}"
+                        th:value="${typeOpt}" th:text="${typeOpt}"></option>
+            </select>
+            <input type="submit" value="save">
+        </form>
+    </th:block>
+</body>
+</html>

@@ -14,10 +14,10 @@ public class CoursesFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        Long courseId = (Long) request.getSession().getAttribute("SelectedCourse");
+        Long courseId = (Long) request.getSession().getAttribute("selectedCourse");
 
         String path = request.getServletPath();
-        if ((!path.equals("/listCourses") && !path.equals("/studentsInCourse")) && courseId == null)response.sendRedirect("/listCourses");
+        if ((!path.equals("/courses") && !path.equals("/studentsInCourse") && !path.startsWith("/courses")) && courseId == null)response.sendRedirect("/courses");
         else filterChain.doFilter(servletRequest,servletResponse);
     }
 }
