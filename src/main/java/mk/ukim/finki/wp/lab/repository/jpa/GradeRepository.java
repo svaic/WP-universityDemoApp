@@ -14,4 +14,6 @@ public interface GradeRepository extends JpaRepository<Grade, Long> {
     Optional<Grade> findByStudent_IdAndCourse_CourseId(Long studentId, Long courseId);
 
     List<Grade> findAllByCourse_CourseIdAndTimestampBetweenOrderById(Long courseId, LocalDateTime start, LocalDateTime end);
+
+    List<Grade> findAllByStudent_NameContainsIgnoreCaseOrStudent_SurnameIgnoreCaseContainsOrStudent_UsernameContainsIgnoreCase(String n,String s,String u);
 }

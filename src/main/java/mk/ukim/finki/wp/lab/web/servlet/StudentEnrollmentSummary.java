@@ -28,7 +28,13 @@ public class StudentEnrollmentSummary extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
 
         WebContext webContext = new WebContext(req, resp, req.getServletContext());
-        webContext.setVariable("courses",courseService.listAll());
+
+        if (req.getParameter("searchStudents") != null)
+        {
+            String searchStudnets = req.getParameter("searchStudents");
+            webContext.setVariable("courses", courseService.searchCourses(searchStudnets));
+        }
+        else webContext.setVariable("courses",courseService.listAll());
         springTemplateEngine.process("studentsInCourse.html",webContext,resp.getWriter());
     }
 }

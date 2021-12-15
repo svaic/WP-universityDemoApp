@@ -32,10 +32,10 @@ public class Grade {
         this.grade = grade.name().charAt(0);
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Student student;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Course course;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")

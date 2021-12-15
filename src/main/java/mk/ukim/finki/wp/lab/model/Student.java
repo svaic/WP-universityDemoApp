@@ -24,4 +24,7 @@ public class Student {
     private String name;
 
     private String surname;
+
+    //@ManyToMany(mappedBy = "students", cascade = CascadeType.DETACH);
+    //List<Course> coursesTaken;
 }

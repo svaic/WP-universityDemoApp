@@ -37,6 +37,11 @@ public class StudentService implements IStudentService {
         studentRepository.save(s);
         return s;
     }
+
+    public List<Student> searchStudents (String searchP) {
+        return studentRepository.findStudentsByNameIgnoreCaseContainsOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCase(searchP,searchP,searchP);
+    }
+
     public Student save(Student s) {
         return studentRepository.save(s);
     }

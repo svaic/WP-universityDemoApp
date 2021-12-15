@@ -1,14 +1,12 @@
 package mk.ukim.finki.wp.lab.service;
 
 import mk.ukim.finki.wp.lab.model.Grade;
-import mk.ukim.finki.wp.lab.model.Teacher;
 import mk.ukim.finki.wp.lab.repository.jpa.GradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GradeService {
@@ -30,5 +28,9 @@ public class GradeService {
 
     public List<Grade> findByTimestampBetween(Long courseId, LocalDateTime start, LocalDateTime end) {
         return gradeRepository.findAllByCourse_CourseIdAndTimestampBetweenOrderById(courseId, start, end);
+    }
+
+    public List<Grade> searchStudents(String query) {
+        return gradeRepository.findAllByStudent_NameContainsIgnoreCaseOrStudent_SurnameIgnoreCaseContainsOrStudent_UsernameContainsIgnoreCase(query,query,query);
     }
 }

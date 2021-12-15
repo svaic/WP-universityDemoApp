@@ -9,6 +9,10 @@
     <h1>Students in Course </h1>
 </nav>
 <section class="container">
+    <form method="get">
+        <label>search:</label><input type="text" name="searchStudents">
+        <input type="submit">
+    </form>
     <th:block th:each="course : ${courses}">
     <div class="bg-primary text-white p-2 h4 m-0" th:text="${course.name}"></div>
     <ul class="list-group">
