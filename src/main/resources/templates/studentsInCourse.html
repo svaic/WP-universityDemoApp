@@ -2,20 +2,20 @@
 <head>
     <meta charset="utf-8">
     <title>WP lab - Students in Course</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<header>
+<nav class="navbar navbar-light bg-light">
     <h1>Students in Course </h1>
-</header>
-<section>
+</nav>
+<section class="container">
     <th:block th:each="course : ${courses}">
-    <div th:text="${course.name}"></div>
-    <ul th:each="student : ${course.students}">
-        <li th:text="${student.name}"></li>
+    <div class="bg-primary text-white p-2 h4 m-0" th:text="${course.name}"></div>
+    <ul class="list-group">
+        <li class="list-group-item" th:each="student : ${course.students}" th:text="${student.name}"></li>
     </ul>
     </th:block>
-    <a href="/listCourses">Back</a>
+    <a href="/courses" class="text-decoration-none"><button class="btn btn-dark btn-lg btn-block">Back</button></a>
 </section>
 
 </body>

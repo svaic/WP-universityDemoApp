@@ -1,20 +1,32 @@
 package mk.ukim.finki.wp.lab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.*;
+import mk.ukim.finki.wp.lab.model.Enum.CourseType;
 
-import javax.annotation.PostConstruct;
+import javax.persistence.*;
 import java.util.List;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Entity
 public class Course {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
+
     private String name;
+
     private String description;
+
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private List<Student> students;
+
+    @ManyToOne
     private Teacher teacher;
+
+    @Enumerated(EnumType.STRING)
     private CourseType type;
 
     public Course(String name, String description, List<Student> students, Teacher teacher, CourseType type) {

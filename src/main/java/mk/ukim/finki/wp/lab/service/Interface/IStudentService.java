@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.service.imp;
+package mk.ukim.finki.wp.lab.service.Interface;
 
 import mk.ukim.finki.wp.lab.model.Student;
 

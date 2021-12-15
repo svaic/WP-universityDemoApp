@@ -1,18 +1,23 @@
 package mk.ukim.finki.wp.lab.service;
 
 import mk.ukim.finki.wp.lab.model.Teacher;
-import mk.ukim.finki.wp.lab.repository.InMemoryTeacherRepository;
-import mk.ukim.finki.wp.lab.service.imp.ITeacherService;
+import mk.ukim.finki.wp.lab.repository.jpa.TeacherRepository;
+import mk.ukim.finki.wp.lab.service.Interface.ITeacherService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class TeacherService implements ITeacherService {
-    private final InMemoryTeacherRepository teacherRepository;
+    private final TeacherRepository teacherRepository;
 
-    public TeacherService(InMemoryTeacherRepository teacherRepository) {
+    public TeacherService(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
+    }
+
+    public Teacher save(Teacher t)
+    {
+        return teacherRepository.save(t);
     }
 
     @Override
@@ -22,6 +27,6 @@ public class TeacherService implements ITeacherService {
 
     @Override
     public Teacher findById(Long id) {
-        return teacherRepository.findById(id);
+        return teacherRepository.findById(id).orElse(null);
     }
 }

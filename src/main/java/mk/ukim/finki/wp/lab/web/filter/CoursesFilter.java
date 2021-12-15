@@ -17,7 +17,9 @@ public class CoursesFilter implements Filter {
         Long courseId = (Long) request.getSession().getAttribute("selectedCourse");
 
         String path = request.getServletPath();
-        if ((!path.equals("/courses") && !path.equals("/studentsInCourse") && !path.startsWith("/courses")) && courseId == null)response.sendRedirect("/courses");
+        if ((!path.equals("/h2") && !path.equals("/courses") && !path.equals("/studentsInCourse") && !path.startsWith("/courses")) && courseId == null){
+            response.sendRedirect("/courses?error="+ "select a course");
+        }
         else filterChain.doFilter(servletRequest,servletResponse);
     }
 }

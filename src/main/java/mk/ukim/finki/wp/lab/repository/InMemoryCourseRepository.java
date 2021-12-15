@@ -2,12 +2,10 @@ package mk.ukim.finki.wp.lab.repository;
 
 import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Course;
-import mk.ukim.finki.wp.lab.model.CourseType;
+import mk.ukim.finki.wp.lab.model.Enum.CourseType;
 import mk.ukim.finki.wp.lab.model.Student;
 import org.springframework.stereotype.Repository;
 
-import javax.management.InstanceNotFoundException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;

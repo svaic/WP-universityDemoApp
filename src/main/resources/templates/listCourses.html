@@ -3,45 +3,67 @@
     <meta charset="utf-8">
     <title>Welcome and Choose a Course</title>
     <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
+        a {
+            text-decoration: none !important;
+            color: white !important
         }
     </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<header>
-    <h1>Courses List</h1>
-</header>
 <main>
-    <h2>Choose course:</h2>
-    <th:block th:if="${error}" th:text="${error}"></th:block>
-    <form th:action="@{/courses}"  th:method="POST">
-        <th:block th:each="course: ${courses}">
-            <input type="radio" name="courseId" th:value="${course.courseId}" th:text="${course.name}" th:checked="${course.courseId == selectedCourse} ? 'true' : 'false'">
-            <br>
-            <label th:text="${course.description}"></label>
-            <label th:text="${course.type}"></label>
-            <a th:href="@{'courses/edit-form/{id}' (id=${course.courseId})}">edit</a>
-            <a th:href="@{'courses/delete/{id}' (id=${course.courseId})}">delete</a>
-            <br/>
-        </th:block>
-        <input type="submit" value="save">
-    </form>
-    <form>
-        <input type="text" name="search" th:value="${search} ? ${search} : ''">
-        <input type="submit" value="search">
-    </form>
-    <form action="" method="get">
-        <label>filter by type</label>
-        <select name="type">
-            <option th:each="typeOpt : ${T(mk.ukim.finki.wp.lab.model.CourseType).values()}"
-                    th:value="${typeOpt}" th:text="${typeOpt}"></option>
-        </select>
-        <input type="submit" value="search">
-    </form>
-    <a href="/addstudent">Submit</a>
-    <a href="/courses/edit-form">add course</a>
+    <nav class="navbar navbar-light bg-light">
+        <form class="m-0">
+            <label class="p-1">search courses:</label>
+            <input type="text" name="search" th:value="${search} ? ${search} : ''">
+            <input type="submit" class="btn btn-secondary ml-3" value="search">
+        </form>
+        <h1>Courses List</h1>
+        <form action="" method="get" class="m-0 ">
+            <label class="p-1">filter by type</label>
+            <select class="p-1" name="type">
+                <option th:each="typeOpt : ${T(mk.ukim.finki.wp.lab.model.Enum.CourseType).values()}"
+                        th:value="${typeOpt}" th:text="${typeOpt}"></option>
+            </select>
+            <input type="submit" class="btn btn-secondary ml-3" value="search">
+        </form>
+    </nav>
+    <div class="col bg-danger text-white p-3 " th:if="${error}" th:text="${error}"></div>
+    <div class="p-4">
+        <h2>Choose course:</h2>
+        <form th:action="@{/courses}"  th:method="POST" class="row">
+            <table class="table p-3">
+                <thead>
+                <tr>
+                    <th scope="col">short name</th>
+                    <th scope="col">full name</th>
+                    <th scope="col">type</th>
+                    <th scope="col">options</th>
+                </tr>
+                </thead>
+                <tr th:each="course: ${courses}">
+                    <th>
+                        <input type="radio" name="courseId" th:value="${course.courseId}" th:checked="${course.courseId == selectedCourse} ? 'true' : 'false'"><label class="m-2 h3" th:text="${course.name}"></label>
+                    </th>
+                    <th class="align-middle" th:text="${course.description}"></th>
+                    <th class="align-middle" th:text="${course.type}"></th>
+                    <th>
+                        <a th:href="@{'courses/course/{id}' (id=${course.courseId})}"><button type="button" class="btn btn-warning mr-3">edit</button></a>
+                        <a th:href="@{'courses/course/delete/{id}' (id=${course.courseId})}"><button type="button" class="btn btn-danger mr-3">delete</button></a>
+                    </th>
+                </tr>
+            </table>
+            <input type="submit"  class="btn btn-Dark btn-lg btn-block" value="select course">
+        </form>
+
+        <div class="row">
+            <a href="/addstudent" class="col p-0 mr-1" ><button type="button" class="btn btn-primary btn-block">add student to course</button></a>
+            <a href="/courses/course" class="col p-0"><button type="button" class="btn btn-primary btn-block">add course</button></a>
+            <a href="/courses/grades" class="col p-0 ml-1"><button type="button" class="btn btn-primary btn-block">add grade</button></a>
+        </div>
+    </div>
+
+
 
 </main>
 </body>
